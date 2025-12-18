@@ -10,11 +10,15 @@ jobs:
       - run: echo "Hello World!!!" # run is used for inline commands
   say-hello-inline-python:
     runs-on: ubuntu-24.04
+    needs:
+      - say-hello-action # wait until this action is completed
     steps:
       - run: "print('Hello World from Python script!!')"
         shell: python # specify a non-default shell
   say-hello-action:
     runs-on: ubuntu-24.04
+    needs:
+      - say-hello-inline-bash
     steps:
       # uses is the keyword to execute 3rd party actions.
       # the commit of the action is good practice for stability and security
