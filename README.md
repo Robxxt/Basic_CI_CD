@@ -33,4 +33,4 @@ You specify the triggers using `on`
 # Workflow runners
 
 - `run`: Runs a inline command
-- `uses`: Runs 3rd party actions. When you use 3rd party actions is good practice to specify the commit to use in order to manage the security and stability of the action.
+- `uses`: Runs 3rd party actions. When you use 3rd party actions is good practice to specify the commit to use in order to manage the security and stability of the action. Writing the commit instead of @version is safer because it prevents the provider to try to inject malicious code and just change the version tag.
