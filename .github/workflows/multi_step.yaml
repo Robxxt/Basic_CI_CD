@@ -14,7 +14,7 @@ jobs:
       - run: "print('Hello World from Python script!!')"
         shell: python # specify a non-default shell
   say-hello-action:
-    run-on: ubuntu-24.04
+    runs-on: ubuntu-24.04
     steps:
       # uses is the keyword to execute 3rd party actions.
       # the commit of the action is good practice for stability and security
