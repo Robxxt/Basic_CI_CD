@@ -1,4 +1,4 @@
-name: Simple Hello World
+name: Multi-Step Action
 
 on:
   workflow_dispatch:
