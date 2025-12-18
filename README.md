@@ -29,3 +29,8 @@ This repository is a laboratory to implement CI/CD using github actions
 You specify the triggers using `on`
 
 - `workflow_dispatch`: You trigger manually. You can see this example in `.github/workflows/simple_hello_world.yaml`
+
+# Workflow runners
+
+- `run`: Runs a inline command
+- `uses`: Runs 3rd party actions. When you use 3rd party actions is good practice to specify the commit to use in order to manage the security and stability of the action.

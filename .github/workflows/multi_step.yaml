@@ -1,0 +1,24 @@
+name: Simple Hello World
+
+on:
+  workflow_dispatch:
+
+jobs:
+  say-hello-inline-bash: # job name
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "Hello World!!!" # run is used for inline commands
+  say-hello-inline-python:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: "print('Hello World from Python script!!')"
+        shell: python # specify a non-default shell
+  say-hello-action:
+    run-on: ubuntu-24.04
+    steps:
+      # uses is the keyword to execute 3rd party actions.
+      # the commit of the action is good practice for stability and security
+      uses: actions/hello-world-javascript-action@081a6d193d1dcb38460df1e6927486d748730f9d # v1.1
+      with:
+        who-to-greet: "from a 3rd party GitHub Action!"
+
