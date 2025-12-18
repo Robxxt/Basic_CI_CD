@@ -64,6 +64,8 @@ You can specify that a job must wait until other jobs have finished by using `ne
 
 # ENV variables
 
+## Loading from workload yaml
+
 The variables can have one of this scopes `Workflow`, `Job`, `Step`. It all depends where you declare them. Just add them like this:
 
 ```yaml
@@ -102,3 +104,10 @@ jobs:
 ## Using `$GITHUB_ENV` (Job scoped ENV variable)
 
 You must write to `$GITHUB_ENV` and then reference it in the next steps using `$`
+
+# Secrets and Variables
+
+You can save secrets and variables for the repository in the `Settings` section.
+To access the variables within the action you just need to specify `${{ secrets.VARIABLE }}` or `${{ vars.VARIABLE }}`
+
+
