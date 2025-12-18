@@ -1,0 +1,21 @@
+name: Trigger Events and Filters
+
+on:
+  push:
+    branches:
+      - "test/*"
+    paths:
+      - "*.txt"
+      - "!*.pwd" # exclude all .pwd files
+
+jobs:
+  say-hi:
+    runs-on: ubuntu-24.04
+    steps: # multi step job
+      - name: Print Hi
+        run: | # multiline command
+          echo ">>> Hi <<<"
+          echo "This worked"
+      - name: Print Pi
+        run: echo "3.14..."
+      
