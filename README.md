@@ -34,3 +34,7 @@ You specify the triggers using `on`
 
 - `run`: Runs an inline command. You can run using different shells `sh, bash, powershell, cmd, node, python`. For running workflow that should work for both `ubuntu` and `windows` you should use `pwsh`.
 - `uses`: Runs 3rd party actions. When you use 3rd party actions is good practice to specify the commit to use in order to manage the security and stability of the action. Writing the commit instead of @version is safer because it prevents the provider to try to inject malicious code and just change the version tag.
+
+# Job order priority
+
+You can specify that a job must wait until other jobs have finished by using `needs by using `needs`. You can find an example in `.github/workflows/multi_step.yaml`
