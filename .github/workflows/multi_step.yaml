@@ -18,7 +18,7 @@ jobs:
     steps:
       # uses is the keyword to execute 3rd party actions.
       # the commit of the action is good practice for stability and security
-      uses: actions/hello-world-javascript-action@081a6d193d1dcb38460df1e6927486d748730f9d # v1.1
-      with:
-        who-to-greet: "from a 3rd party GitHub Action!"
+      - uses: actions/hello-world-javascript-action@081a6d193d1dcb38460df1e6927486d748730f9d # v1.1
+        with:
+          who-to-greet: "from a 3rd party GitHub Action!"
 
