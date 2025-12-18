@@ -108,6 +108,9 @@ You must write to `$GITHUB_ENV` and then reference it in the next steps using `$
 # Secrets and Variables
 
 You can save secrets and variables for the repository in the `Settings` section.
-To access the variables within the action you just need to specify `${{ secrets.VARIABLE }}` or `${{ vars.VARIABLE }}`
+There are two types of variables and secrets. `Environment` this is used to split same variable across different contexts.
+You coudl have two environments like production and development, each having a different `API_KEY`. Or `Repository` secrets and variables.
+To access the variables within the action you just need to specify `${{ secrets.VARIABLE }}` or `${{ vars.VARIABLE }}`.
+In the case where the secrets or variables are not from repository but rather from an `Environment` you need to specify it by giving `environment: <name>`
 
 
