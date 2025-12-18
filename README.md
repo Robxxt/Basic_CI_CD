@@ -26,9 +26,32 @@ This repository is a laboratory to implement CI/CD using github actions
 
 # Workflow Triggers
 
-You specify the triggers using `on`
+You specify the triggers using `on`. Almost all GitHub events can trigger a workflow.
+Some that I have been using are:
 
 - `workflow_dispatch`: You trigger manually. You can see this example in `.github/workflows/simple_hello_world.yaml`
+- `push`: Push to branch or Tag.
+```yaml
+on:
+    push:
+        branches:
+            - "feature/*"
+```
+- `pull_request`: Create/Update PR
+```yaml
+on:
+    pull_request:
+        types:
+            - opened
+            - synchronize
+            - reopened
+```
+- `schedule`: Cron Schedule. You can specify when do you want it to run.
+```yaml
+on:
+    schedule:
+        - cron: "0 0 * * *" # Run at midnight
+```
 
 # Workflow runners
 
