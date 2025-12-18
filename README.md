@@ -30,7 +30,7 @@ You specify the triggers using `on`. Almost all GitHub events can trigger a work
 Some that I have been using are:
 
 - `workflow_dispatch`: You trigger manually. You can see this example in `.github/workflows/simple_hello_world.yaml`
-- `push`: Push to branch or Tag.
+- `push`: Push to branch or Tag. You have an example in `.github/workflows/triggers_and_filters.yaml`
 ```yaml
 on:
     push:
@@ -61,3 +61,44 @@ on:
 # Job order priority
 
 You can specify that a job must wait until other jobs have finished by using `needs by using `needs`. You can find an example in `.github/workflows/multi_step.yaml`
+
+# ENV variables
+
+The variables can have one of this scopes `Workflow`, `Job`, `Step`. It all depends where you declare them. Just add them like this:
+
+```yaml
+env:
+    EXAMPLE: THIS_IS_AN_EXAMPLE_ENV_VARIABLE
+```
+
+You can persist or pass variables from one step to another. There are two ways and depending on each one you will have to call the variable in other steps/jobs with different syntax.
+
+## Using `$GITHUB_OUTPUT` (Step output, for job output)
+
+Standard way to pass specific data. It's highly scope (inter-job), that means when you call it you must give the step an `id`. You must write to `$GITHUB_OUTPUT` and then reference it in next steps using `${{}}`
+
+```yaml
+jobs:
+    producer:
+        runs-on: ubuntu-24.04
+        outputs: # To pass it to other jobs.
+            random_number: ${{ steps.random_generator.outputs.random_val }}
+        steps:
+          - name: Generate a random number
+            id: random_generator # You MUST have an ID
+            run: echo "random_val=$RANDOM" >> $GITHUB_OUTPUT
+        
+          - name: Use that number
+            run: echo "The number was ${{ steps.random_generator.outputs.random_val }}"
+
+    consumer:
+        runs-on: ubuntu-24.04
+        needs: producer # specify the task from where it will get the ENV variable
+        steps:
+            - name: Inspect values from producer
+              run: echo "${{ needs.producer.outputs.random_number }}"
+```
+
+## Using `$GITHUB_ENV` (Job scoped ENV variable)
+
+You must write to `$GITHUB_ENV` and then reference it in the next steps using `$`

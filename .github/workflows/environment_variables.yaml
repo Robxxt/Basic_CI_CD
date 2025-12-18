@@ -1,0 +1,29 @@
+name: Passing ENV Variable accross steps and jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  random_universe: # job that creates random numbers
+    runs-on: ubuntu-24.04
+    outputs:
+      random_number: ${{ steps.random_generator.outputs.random }}
+    steps:
+      - name: Generate Random
+        id: random_generator
+        run: |
+          echo random_local=$RANDOM >> $GITHUB_ENV
+          echo random=$RANDOM >> $GITHUB_OUTPUT
+      - name: Display random number from within same job
+        run: |
+          echo "random_local set using GITHUB_ENV $random_local"
+          echo "random set using GITHUB_OUTPUT ${{ steps.random_generator.outputs.random }}"
+  consume_randomness: # job that gets the random_number from previous job
+    runs-on: ubuntu-24.04
+    needs:
+      - random_universe
+    steps:
+      - name: See the randomness
+        run: echo "random set by random_universe job {{ needs.random_universe.outputs.random_number }}"
+
+  
