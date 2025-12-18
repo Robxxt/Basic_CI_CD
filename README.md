@@ -28,4 +28,4 @@ This repository is a laboratory to implement CI/CD using github actions
 
 You specify the triggers using `on`
 
-- `workflow_dispatch`: You trigger manually. You can see this example in `workflows/simple_hello_world.yaml`
+- `workflow_dispatch`: You trigger manually. You can see this example in `.github/workflows/simple_hello_world.yaml`
