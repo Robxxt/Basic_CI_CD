@@ -24,6 +24,6 @@ jobs:
       - random_universe
     steps:
       - name: See the randomness
-        run: echo "random set by random_universe job {{ needs.random_universe.outputs.random_number }}"
+        run: echo "random set by random_universe job ${{ needs.random_universe.outputs.random_number }}"
 
   
