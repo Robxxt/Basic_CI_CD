@@ -143,4 +143,6 @@ Specified by `runs-on` field. The runner type specifies the VM image used (OS & 
 
 ## Artifacts
 
-Persist data beyond the lifecycle of a job.
+Persist data beyond the lifecycle of a job. Using `actions/upload-artifact` to upload the file/blob and `actions/download-artifact` to download it for the next job.
+
+This is very useful because it allows you to dedicate a job to compile the code. And then you can download the binary in the next job to test it.

@@ -18,6 +18,7 @@ jobs:
         with:
           name: example-artifact # set artifact name
           path: example.txt
+          retention-days: 1
   artifact-consumer:
     name: Consume artifact
     runs-on: ubuntu-24.04
