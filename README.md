@@ -146,3 +146,7 @@ Specified by `runs-on` field. The runner type specifies the VM image used (OS & 
 Persist data beyond the lifecycle of a job. Using `actions/upload-artifact` to upload the file/blob and `actions/download-artifact` to download it for the next job.
 
 This is very useful because it allows you to dedicate a job to compile the code. And then you can download the binary in the next job to test it.
+
+The file is getting uploaded to github storage cloud and persists usually for 90 days (for public repos), then it gets removed. The storage used counts against your github account storage quota. You can customize the duration of retention using `retention-days: <int>`. When you run a new workflow it will create a new artifact for the new run history. Another option is to remove the artifacts manually from the workflow run.
+
+***NOTE***: You can also download the workflows.
