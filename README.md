@@ -113,3 +113,34 @@ You coudl have two environments like production and development, each having a d
 To access the variables within the action you just need to specify `${{ secrets.VARIABLE }}` or `${{ vars.VARIABLE }}`.
 In the case where the secrets or variables are not from repository but rather from an `Environment` you need to specify it by giving `environment: <name>`
 For reference you can check `.github/workflows/secrets_and_vars.yaml`
+
+# Contexts
+
+`needs`: outputs & results from other jobs
+
+`steps`: prior steps outputs & conclusion
+
+`secrets`: secret values
+
+`vars`: repo/org/environment config variables (good for cross-workflow settings)
+
+`env`: variable set at workflow/job/step
+
+`job`: job status, container/service information
+
+`inputs`: parameters to reusable/workflow_dispatch workflows.
+
+# Advanced
+
+## Runner Types
+
+Specified by `runs-on` field. The runner type specifies the VM image used (OS & dependencies) as well as the resources available (CPU & memory). There are three hosting options:
+
+- GitHub
+- 3rd Party: Sometimes it is faster or it bring other advanced features like faster caching, better observability or custom images.
+- Self-hosted: Run it on your own hardware, for example using a K8 cluster.
+- self-hosted
+
+## Artifacts
+
+Persist data beyond the lifecycle of a job.
