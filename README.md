@@ -141,7 +141,9 @@ Specified by `runs-on` field. The runner type specifies the VM image used (OS & 
 - Self-hosted: Run it on your own hardware, for example using a K8 cluster.
 - self-hosted
 
-## Artifacts
+## Presist Data
+
+### Artifacts
 
 Persist data beyond the lifecycle of a job. Using `actions/upload-artifact` to upload the file/blob and `actions/download-artifact` to download it for the next job.
 
@@ -149,4 +151,38 @@ This is very useful because it allows you to dedicate a job to compile the code.
 
 The file is getting uploaded to github storage cloud and persists usually for 90 days (for public repos), then it gets removed. The storage used counts against your github account storage quota. You can customize the duration of retention using `retention-days: <int>`. When you run a new workflow it will create a new artifact for the new run history. Another option is to remove the artifacts manually from the workflow run.
 
-***NOTE***: You can also download the workflows.
+***NOTE***: You can also download the artifacts from the workflows run.
+
+You can see an example of artifacts in `.github/workflows/artifacts.yaml`
+
+### Cache
+
+Very useful to persist dependencies and increase the speed of the action. You don't want to install every time all packages using pip or npm. You do it once and persist them until the dependencies have changed. In this way you save minutes for every action, potentially saving tens/hundreds of hours of execution a year.
+
+***NOTE***: There is a maximum of 10GB cache. Once you hit it, Github will start removing older cache.
+
+Here comes handy to use 3rd party hosted services. Some offer options to cache volumes. Instead of upload/download from "Object Store" it snapshots the volume after completion and then mounts a volume to each of the jobs. Saving the upload/download time.
+
+## GitHub Token Permission
+
+By default GitHub creates a temporary token for the duration of the workflow. You can access it with `{{ github.token }}`. You can see the default permissions of your repository by going to `Settings → Actions → General → Workflow permissions`
+It's good practice to either block everything by start `permissions: read-all` or specify the permissions:
+
+```yaml
+permissions:
+    contents: read
+    issues: write
+```
+
+## External Service Authentication
+
+### Static credentials (API key)
+- Long-lived credential stored in GitHub Actions repo/environment secret.
+- Less secure
+- Very good compatibility with everything
+
+### OIDC (OpenID Connect) Token
+
+- Short-lived credential retrieved at runtime
+- More secure
+- requires service to support OIDC
