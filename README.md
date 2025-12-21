@@ -186,3 +186,7 @@ permissions:
 - Short-lived credential retrieved at runtime
 - More secure
 - requires service to support OIDC
+
+## Matrix
+
+Eable executing multiple compies of a job with different configs
